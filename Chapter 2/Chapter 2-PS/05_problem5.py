@@ -8,7 +8,7 @@ def home():
 
 @app.route("/skills/<name>")
 def skills(name):
-    return render_template("05_index.html",skills = ["Python", "Flask", "HTML"],content=name)
+    return render_template("05_index.html",skills = ["Python", "Flask", "HTML"],name=name)
 
 if __name__=="__main__":
     app.run(debug=True)
