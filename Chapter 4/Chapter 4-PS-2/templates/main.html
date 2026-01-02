@@ -1,0 +1,31 @@
+{%extends "base.html"%}
+{%block content%}
+<h1>Welcome {{usr}}</h1>
+<script>
+  const text = "{{ tts_text }}";
+
+  if (text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    utterance.lang = "en-GB";   // Best accent
+    utterance.rate = 0.95;      // Natural speed
+    utterance.pitch = 1.0;      // Human tone
+    utterance.volume = 1.0;
+
+    function speak() {
+      const voices = speechSynthesis.getVoices();
+      const voice = voices.find(v => v.lang === "en-GB") || voices[0];
+      utterance.voice = voice;
+      speechSynthesis.speak(utterance);
+    }
+
+    // Fix Chrome voice loading issue
+    if (speechSynthesis.getVoices().length === 0) {
+      speechSynthesis.onvoiceschanged = speak;
+    } else {
+      speak();
+    }
+  }
+</script>
+
+{%endblock%}
