@@ -16,7 +16,7 @@ def login():
 
 @app.route("/dashboard/<usr>")
 def user(usr):
-    tts_text = f"Welcome {usr}. You have successfully logged in."
+    tts_text = f"Welcome {usr}."
 
     return render_template(
         "main.html",
